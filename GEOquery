@@ -1,0 +1,6 @@
+library(GEOquery)
+gsetGSE33630=getGEO("GSE33630",destdir =".")
+gsetGSE33630=gset[[1]]
+fdataGSE33630=fData(gsetGSE33630)
+pdataGSE33630=pData(gsetGSE33630)
+GSE33630=exprs(gsetGSE33630)
