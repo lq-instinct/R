@@ -1,0 +1,11 @@
+library("biomaRt")
+ensembl = useMart(biomart="ensembl",dataset="hsapiens_gene_ensembl")
+GN4 = getBM(attributes=c("refseq_ncrna","hgnc_symbol"), ###refseq_mrna_predicted，refseq_ncrna_predicted,refseq_mrna
+                  filters="refseq_ncrna",
+                  values=gene[,1], 
+                  mart=ensembl)
+                  
+GN4 = getBM(attributes=c("affy_hg_u133_plus_2","hgnc_symbol"), 
+                  filters="affy_hg_u133_plus_2",
+                  values=gene[,1], 
+                  mart=ensembl)                  
