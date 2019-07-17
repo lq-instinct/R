@@ -1,0 +1,21 @@
+expGSE60542 = read.table("expGSE60542.txt",header = T,sep = "\t")
+rownames(expGSE60542)=expGSE60542[,1]
+expGSE60542=expGSE60542[,-1]
+t1 = edgeR::DGEList(GSE60542,group=as.character(groupGSE60542[,1]))
+t2 = edgeR::estimateCommonDisp(t1)
+t3 = edgeR::exactTest(t2)
+logFC_table <- t3$table
+table_GSE60542 <- edgeR::topTags(t3, n = nrow(t3$table))$table
+table_GSE60542 <- table_GSE60542[table_GSE60542$FDR <= 0.05, ]
+table_GSE60542 <- table_GSE60542[abs(table_GSE60542$logFC) >= 1, ]
+
+thyriodData = read.table("thyriod1.txt",header = T,sep = "\t")
+rownames(thyriodData)= thyriodData [,1]
+thyriodData2=thyriodData[,thyriodData[nrow(thyriodData),]!=1]
+thyriodData2=thyriodData2[,-1]
+t1 = edgeR::DGEList(thyriodData2[c(1:nrow(thyriodData2)-1),],group = as.factor(as.character(thyriodData2[nrow(thyriodData2),])))
+t2 = edgeR::estimateCommonDisp(t1)
+t3 = edgeR::exactTest(t2)
+logFC_table <- t3$table
+tableDEA2 <- edgeR::topTags(t3, n = nrow(t3$table))$table
+tableDEA2 <- tableDEA2[tableDEA2$FDR <= 0.05, ]
