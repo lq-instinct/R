@@ -1,0 +1,5 @@
+library(pheatmap)
+heatdata_thyroid=thyriod[rownames(l_thyroid),]
+annotation_col=data.frame(groupthyriod)
+rownames(annotation_col)=colnames(heatdata_thyroid)
+pheatmap(heatdata_thyroid,cluster_rows = TRUE,cluster_cols = TRUE,annotation_col = annotation_col,annotation_legend = T,show_rownames = F,scale = "row",color=colorRampPalette(c("blue","white","red"))(100),cellwidth = 4,cellheight = 0.3,fontsize = 10,main="thyroid")
